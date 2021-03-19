@@ -3,3 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  
+  form#buscador(action="", method="post")
+    input#busqueda(type="text" name="busqueda")
+    input(type="submit") 
