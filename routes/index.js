@@ -6,7 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 router.post('/', (req, res) => {
-  console.log(req.body)  
+  res.setHeader('Content-Type', 'application/json');
+  res.send({"tuBusqueda":`${req.body.busqueda}`})  
 });
 
 module.exports = router;
