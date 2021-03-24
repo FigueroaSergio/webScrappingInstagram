@@ -6,10 +6,10 @@ var search = require("./browser")
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/:person', (req, res) => {
-  person = req.params.person
-  console.log(person)
-  search(person)
+router.get('/:nickname', (req, res) => {
+  nickname = req.params.nickname
+  console.log(nickname)
+  search(nickname)
   .then((datos) => { res.json( datos ) }, (err) => next(err))
   .catch((err) => {console.log("error")});
 

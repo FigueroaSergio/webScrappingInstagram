@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
-async function search(person) {
+async function search(nickname) {
 
-    const url = `https://www.instagram.com/${person}`
+    const url = `https://www.instagram.com/${nickname}`
     console.log(url)
     const browser = await puppeteer.launch({headless: true,slowMo:100})
     const page = await browser.newPage()
@@ -9,10 +9,10 @@ async function search(person) {
 
     await page.goto(url)
    
-    await page.screenshot({ path: `./public/images/${person}.png` })
+    // await page.screenshot({ path: `./public/images/${nickname}.png` })
     
 
-    let obj = {}
+    
     
     await page.waitForSelector("[data-testid=user-avatar]")
     const imgProfile = await page.evaluate(() => {
@@ -20,12 +20,35 @@ async function search(person) {
 
         return img;
     });
-    obj["Nombre"] = person
-    obj["Imagen"] = imgProfile
+    const basicInfo = await page.evaluate(() => {
+              const elements = document.querySelectorAll('section ul li span');
+              const datos = []
+              for (let element of elements) {
+                datos.push(element.textContent)
+              }
+        
+              return datos;
+            });
+    // console.log(basicInfo)
+    const images = await page.evaluate(()=>{
+        const elements = document.querySelectorAll("article div>a")
+        const datos=[]
+        for (let element of elements){
+            datos.push(element.href)
+        }
+    })
+    let data = {
+        "name":nickname,
+        "img":imgProfile,
+        "media":basicInfo[0],
+        "follow":basicInfo[1],
+        "followers":basicInfo[2]
+    }
+    
     await browser.close()
-    console.log(obj)
-    return obj
+    console.log(data)
+    return data
 
 
 }
-module.exports = (person) => search(person)
+module.exports = (nickname) => search(nickname)

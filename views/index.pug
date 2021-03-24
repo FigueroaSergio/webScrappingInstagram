@@ -1,10 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Instagram
+  p Welcome to my instagram WebScapping 
    
-  form#search()
-    input#person(type="text" name="person")
-    input(type="submit") 
+  form#searcher()
+    input#nickname(type="text" name="nickname")
+    input(type="submit")
+  d#dataSpace 
+
   script(src="./javascripts/buscar.js") 

@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+.imgRound{
+ border-radius: 50%;
+ height: 65px;
+ width: 65px; 
+}
+table{
+  align-items: center;
+}
