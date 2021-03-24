@@ -3,14 +3,14 @@ async function search(person) {
 
     const url = `https://www.instagram.com/${person}`
     console.log(url)
-    const browser = await puppeteer.launch({headless: false,slowMo:1000})
+    const browser = await puppeteer.launch({headless: true,slowMo:100})
     const page = await browser.newPage()
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36');
 
     await page.goto(url)
    
     await page.screenshot({ path: `./public/images/${person}.png` })
-    await page.waitForTimeout(5000)
+    
 
     let obj = {}
     

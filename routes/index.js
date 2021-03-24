@@ -6,11 +6,14 @@ var search = require("./browser")
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.post('/', (req, res) => {
-  person = req.body.person
+router.get('/:person', (req, res) => {
+  person = req.params.person
   console.log(person)
-  search(person).then((datos) => { res.json({ "status": datos }) }, (err) => next(err)).catch((err) => {console.log("error")});
+  search(person)
+  .then((datos) => { res.json( datos ) }, (err) => next(err))
+  .catch((err) => {console.log("error")});
 
 });
+
 
 module.exports = router;
