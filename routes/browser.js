@@ -3,7 +3,7 @@ async function search(nickname) {
 
     const url = `https://www.instagram.com/${nickname}`
     console.log(url)
-    const browser = await puppeteer.launch({headless: true,slowMo:500})
+    const browser = await puppeteer.launch({headless: true,slowMo:100})
     const page = await browser.newPage()
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36');
 
@@ -38,7 +38,7 @@ async function search(nickname) {
         }             
         return urls
     })
-    console.log(images)
+    // console.log(images)
     let pagePromise = (link )=>new Promise(async(res)=>{
         let metadatos={}
         let newPage = await browser.newPage()
@@ -49,6 +49,7 @@ async function search(nickname) {
         let likes = await newPage.$eval('article section a>span', text => text.textContent);
         let date =await newPage.$eval('a.c-Yi7 time', text => text.getAttribute("datetime"));
         metadatos={
+            "url":link,
             "likes":likes,
             "date":date
         }
@@ -56,10 +57,12 @@ async function search(nickname) {
         
         await newPage.close()
     })
+    let imgs=[]
     for( let url of images){
-        console.log(url)
+        // console.log(url)
         let currentPageData= await pagePromise(url)
-        console.log(currentPageData)
+        imgs.push(currentPageData)
+        // console.log(currentPageData)
     }
     
     let data = {
@@ -67,7 +70,8 @@ async function search(nickname) {
         "img":imgProfile,
         "media":basicInfo[0],
         "followers":basicInfo[1],
-        "follow":basicInfo[2]
+        "follow":basicInfo[2],
+        "posts":imgs
     }
     await page.close()
     await browser.close()

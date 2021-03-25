@@ -36,3 +36,6 @@ table{
 input{
   text-align: center;
 }
+#cargando{
+  display:none;
+}

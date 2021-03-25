@@ -3,19 +3,39 @@
 const searcher = document.getElementById("searcher")
 const dataSpace = document.getElementById("dataSpace")
 const fragment = document.createDocumentFragment()
+const input = document.getElementById("nickname")
+const cargando =document.getElementById("cargando")
+const cargado =document.getElementById("cargado")
+
+input.onkeypress=(e)=>{if(e.key=="Enter"){fecthSearch()}}
+
 var count = 0
 var prueba= {
-   "name": 'sergio._.figal',
-   "img": 'https://scontent-bog1-1.cdninstagram.com/v/t51.2885-19/s150x150/83543824_586934628522925_8240128626935201792_n.jpg?tp=1&_nc_ht=scontent-bog1-1.cdninstagram.com&_nc_ohc=k_WeB059zlQAX9v13P6&ccb=7-4&oh=c72196ce84e7707d92d7cf0a995b4933&oe=6084A8CA&_nc_sid=7bff83',
-   "media": '6',
-   "followers": '67',
-   "follow": '93'
- }
-searcher.addEventListener("submit", event => {
-    const nickname = document.getElementById("nickname").value
-    event.preventDefault()
-    // renderData(prueba)
-    fetch(`/user/${nickname}`, {
+    "name": 'avril_f99',
+    "img": 'https://scontent-bog1-1.cdninstagram.com/v/t51.2885-19/s150x150/132003729_702077440451532_3433343025448042151_n.jpg?tp=1&_nc_ht=scontent-bog1-1.cdninstagram.com&_nc_ohc=nUzR9GaTPQoAX8oy_fS&ccb=7-4&oh=0e69d9ffb2aa595cda50d81d4af647bf&oe=6086E759&_nc_sid=7bff83',
+    "media": '1',
+    "followers": '214',
+    "follow": '251',
+    "posts": [
+      {
+        "url": 'https://www.instagram.com/p/BgogtQBnc9H/',
+        "likes": '37',
+        "date": '2018-03-22T16:56:17.000Z'
+      }
+    ]
+  }
+let search = document.getElementById("search")
+search.onclick= fecthSearch
+function fecthSearch(){
+    
+    const nickname= input.value
+    input.value=""
+    cargando.style.display = 'inline-block'
+    cargado.style.display="none"
+    search.disabled=true
+    input.disabled=true
+    let url =`/user/${nickname}`
+    fetch(url, {
         method: 'GET'
     })
         .then(res => res.json())
@@ -25,9 +45,16 @@ searcher.addEventListener("submit", event => {
                 , JSON.stringify(data))
             count++
             renderData(data)
+        }).finally(()=>{
+            cargando.style.display = 'none'
+            cargado.style.display = 'inline-block'
+            search.disabled=false
+            input.disabled=false
+            
         })
 
-})
+}
+
 function renderData(person) {
     let card = document.createElement("div")
     card.classList.add("card", "text-white", "datacard")

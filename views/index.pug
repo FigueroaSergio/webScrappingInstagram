@@ -1,14 +1,18 @@
 extends layout
 
 block content
+  
   div(class="card text-white")
     h1 Instagram
     p Welcome to my instagram WebScapping 
-    form#searcher(class="row g-1  justify-content-center")
+    div(class="row g-1  justify-content-center")
       div(class="col col-6")
         input#nickname.form-control( class="form-control" type="text" name="nickname")
       div.col-12
-        button(class="btn" type="submit") Buscar
+        button#search(type="button" class="btn" ) 
+          span#cargando.spinner-border.spinner-border-sm(role='status' aria-hidden='true')
+          span#cargado Buscar
+
   div#dataSpace
   //-   div(class="card text-white datacard")
   //-     .row.align-items-center
