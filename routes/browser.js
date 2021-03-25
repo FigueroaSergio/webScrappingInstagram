@@ -66,8 +66,8 @@ async function search(nickname) {
         "name":nickname,
         "img":imgProfile,
         "media":basicInfo[0],
-        "follow":basicInfo[1],
-        "followers":basicInfo[2]
+        "followers":basicInfo[1],
+        "follow":basicInfo[2]
     }
     await page.close()
     await browser.close()

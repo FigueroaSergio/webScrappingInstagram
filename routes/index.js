@@ -6,7 +6,7 @@ var search = require("./browser")
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/:nickname', (req, res) => {
+router.get('/user/:nickname', (req, res) => {
   nickname = req.params.nickname
   console.log(nickname)
   search(nickname)

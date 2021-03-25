@@ -1,16 +1,38 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  align-items: center;
+  text-align: center;
+  color: aliceblue !important ;
+  
+  background: #1e1e2f !important;
 }
-
+.card{
+  background: #27293d !important;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: .5rem;
+  
+}
+.btn{
+  color: aliceblue  !important;
+  background: linear-gradient(to bottom left,#e14eca,#ba54f5,#e14eca)!important;
+}
+.row{
+  text-align: center;
+}
 a {
   color: #00B7FF;
 }
 .imgRound{
  border-radius: 50%;
- height: 65px;
- width: 65px; 
+ border: 2px solid !important;
+ color: #e14eca !important;
+ 
 }
 table{
   align-items: center;
+}
+input{
+  text-align: center;
 }

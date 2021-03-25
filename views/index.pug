@@ -1,12 +1,29 @@
 extends layout
 
 block content
-  h1 Instagram
-  p Welcome to my instagram WebScapping 
-   
-  form#searcher()
-    input#nickname(type="text" name="nickname")
-    input(type="submit")
-  d#dataSpace 
+  div(class="card text-white")
+    h1 Instagram
+    p Welcome to my instagram WebScapping 
+    form#searcher(class="row g-1  justify-content-center")
+      div(class="col col-6")
+        input#nickname.form-control( class="form-control" type="text" name="nickname")
+      div.col-12
+        button(class="btn" type="submit") Buscar
+  div#dataSpace
+  //-   div(class="card text-white datacard")
+  //-     .row.align-items-center
+  //-       .col-12.col-sm-4.col-md-2.col-lg-1 
+  //-         img.img-fluid.imgRound( src="https://scontent-bog1-1.cdninstagram.com/v/t51.2885-19/s150x150/83543824_586934628522925_8240128626935201792_n.jpg?tp=1&_nc_ht=scontent-bog1-1.cdninstagram.com&_nc_ohc=k_WeB059zlQAX9v13P6&ccb=7-4&oh=c72196ce84e7707d92d7cf0a995b4933&oe=6084A8CA&_nc_sid=7bff83", alt="")
+  //-       .col-12.col-sm-8.col-md-10.col-lg-11.justify-content-center
+  //-         .row.align-items-center
+  //-           .col-12.col-sm-6.col-md-3
+  //-             h5 Nombre: sergio._.figal
+  //-           .col-12.col-sm-6.col-md-3
+  //-             h5 Seguidos: 67
+  //-           .col-12.col-sm-6.col-md-3 
+  //-             h5  Seguidores: 93
+  //-           .col-12.col-sm-6.col-md-3 
+  //-             h5  Foto con mas likes : 30
+    
 
   script(src="./javascripts/buscar.js") 
