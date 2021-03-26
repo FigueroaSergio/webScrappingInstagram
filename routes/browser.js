@@ -38,7 +38,7 @@ async function search(nickname) {
         }             
         return urls
     })
-    // console.log(images)
+     console.log(images)
     let pagePromise = (link )=>new Promise(async(res)=>{
         let metadatos={}
         let newPage = await browser.newPage()
@@ -46,13 +46,25 @@ async function search(nickname) {
 
         await newPage.goto(link)
         // await newPage.screenshot({ path: `./public/images/segio.png` })
-        let likes = await newPage.$eval('article section a>span', text => text.textContent);
-        let date =await newPage.$eval('a.c-Yi7 time', text => text.getAttribute("datetime"));
+        try {
+            let likes = await newPage.$eval('article section a span', text => text.textContent);
+            let date =await newPage.$eval('a.c-Yi7 time', text => text.getAttribute("datetime"));
+
         metadatos={
             "url":link,
             "likes":likes,
             "date":date
         }
+        } catch (error) {
+            let likes = await newPage.$eval('article section span>span', text => text.textContent);
+            let date =await newPage.$eval('a.c-Yi7 time', text => text.getAttribute("datetime"));
+            metadatos={
+                "url":link,
+                "likes":likes,
+                "date":date
+            }
+        }
+        
         res(metadatos)
         
         await newPage.close()
@@ -62,7 +74,7 @@ async function search(nickname) {
         // console.log(url)
         let currentPageData= await pagePromise(url)
         imgs.push(currentPageData)
-        // console.log(currentPageData)
+        console.log(currentPageData)
     }
     
     let data = {
